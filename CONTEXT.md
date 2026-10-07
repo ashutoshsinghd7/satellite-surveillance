@@ -1,348 +1,66 @@
-# Project Context
+# Project Context : Multi-Sensor Satellite Surveillance & Hazard Intelligence
 
-## Working Concept
+Name: GeoAgis
 
-We are exploring an **AI-based remote surveillance and environmental intelligence system** that uses satellite-based Earth observation, particularly **optical imagery and radar/SAR data**, to continuously monitor difficult and remote regions such as the Himalayas.
+**Status:** in Development.
 
-The original motivation comes from a difficult high-altitude surveillance scenario.
+## One Sentence Definition:
 
-During periods of extremely harsh weather and environmental conditions, maintaining continuous physical surveillance using personnel or drones can become difficult, expensive, or unreliable. Severe cold, snowfall, cloud cover, low visibility, strong winds, difficult terrain, battery limitations, and restricted accessibility can all create gaps in observation.
+An AI system that fuses optical + SAR satellite imagery over difficult, remote terrain (starting with the Himalayas) to continuously detect change, assess terrain/environmental hazards, and deliver confidence rated, evidence backed alerts to human decision makers  for both defense situational awareness and civilian mountain safety.
 
-In a sensitive region, these gaps in observation can become a serious situational-awareness problem. If ground personnel or aerial drones cannot continuously observe an area, there is a need for another way to maintain awareness of significant changes in the region.
+## Problem
 
-The initial thought was:
+- Physical/drone surveillance in high-altitude terrain is unreliable: cold, snowfall, cloud cover, rugged terrain, battery limits, restricted access create observation gaps.
+- Satellites can cover the gap, but imagery volume is too large to review manually.
+- Optical fails under cloud/darkness. SAR works day/night through cloud but is harder to interpret alone.
+- Goal: **raw imagery → detected change → interpreted, confidence rated intelligence**, not stopping at image classification.
 
-> **Instead of relying entirely on physical presence or drones, can we use satellites and AI to continuously monitor a region and automatically identify meaningful environmental or physical changes?**
+## Design Philosophy
 
-This led to the broader idea of a **multi-sensor AI surveillance and decision-support system**.
-
----
-
-## Core Problem
-
-The core problem is **continuous situational awareness in regions where conventional surveillance is difficult because of environmental and geographic constraints.**
-
-The system is intended to address conditions such as:
-
-* Extreme temperatures
-* Heavy snowfall
-* Cloud cover
-* Low visibility
-* Rugged and inaccessible terrain
-* Limited physical access
-* Difficulty in maintaining continuous drone operations
-* Large geographic areas that are difficult to monitor manually
-* Large amounts of satellite imagery that are difficult for humans to analyse continuously
-
-The problem is therefore not simply:
-
-> "How do we get satellite images?"
-
-The deeper problem is:
-
-> **How do we continuously understand what is changing in a difficult region and provide humans with useful, interpretable information for making decisions?**
+- Decision support, not autonomy — the system flags, humans decide.
+- Every output is explainable: what was detected, why, what evidence supports it, how confident the system is.
+- No single opaque score — independent evidence stays inspectable; fusion happens at decision level.
+- Confidence is mandatory — satellite data is incomplete, noisy, outdated, or weather-limited.
+- "Continuous" ≠ real-time — bounded by revisit frequency and coverage.
 
 ---
 
-## Initial Surveillance Concept
-
-The proposed direction is to combine multiple forms of satellite observation, primarily:
-
-**Optical satellite imagery**
-
-and
-
-**Radar / Synthetic Aperture Radar (SAR) imagery**
-
-The reason for using multiple sensors is that each sensing method has different strengths and limitations.
-
-Optical imagery can provide rich visual and spectral information, but its usefulness can be reduced by cloud cover, darkness, and some environmental conditions.
-
-Radar/SAR can provide observations during day and night and is much less affected by cloud cover, making it particularly useful in environments where optical observation is unreliable.
-
-Rather than depending on one sensor, the broader concept is therefore:
-
-> **Use multiple sensing modalities and AI to build a more reliable understanding of the same geographic region.**
-
----
-
-## What We Ultimately Want the System to Understand
-
-The system should not simply return satellite images.
-
-The intended goal is to transform raw satellite observations into **interpretable information about a region**.
-
-For example, the system should eventually help answer questions such as:
-
-### Environmental / Terrain Questions
-
-* What is the current state of the terrain?
-* What areas have steep slopes?
-* Where has snow accumulated?
-* Are there signs of terrain instability?
-* Which regions may have elevated avalanche risk?
-* Are there signs of landslides or other natural hazards?
-* How has the terrain or snow coverage changed over time?
-
-### Change Detection Questions
-
-* What has changed since the previous observation?
-* Where did the change occur?
-* Is the change likely to be natural or human-induced?
-* How significant is the detected change?
-* How confident is the system in its interpretation?
-
-The system is intended to move from:
-
-**raw imagery → detected change → interpreted information → decision support**
-
-rather than stopping at image classification.
-
----
-
-## Important Secondary Use Case: Mountain Safety
-
-While the original motivation comes from surveillance in difficult high-altitude environments, the technology should not be restricted to defense.
-
-The same underlying capabilities can potentially support **mountain safety and environmental monitoring**.
-
-For example, the system could help with:
-
-* Avalanche monitoring
-* Snow-condition assessment
-* Landslide monitoring
-* Mountain hazard awareness
-* Infrastructure monitoring
-* Remote-region environmental observation
-* Tourist and hiker safety
-* Search-and-rescue support
-* Disaster monitoring
-
-This creates a broader dual-use concept:
-
-> **The same remote-sensing intelligence infrastructure could support both sensitive-region situational awareness and civilian environmental/mountain safety applications.**
-
----
-
-## Defense Application
-
-A future application could be integration into defense or border-region monitoring systems.
-
-The intended role is **decision support**, not autonomous decision-making.
-
-The system would provide humans with information such as:
-
-* Detected changes
-* Areas requiring attention
-* Environmental conditions
-* Terrain characteristics
-* Possible hazards
-* Historical changes
-* Confidence estimates
-
-Humans would remain responsible for interpreting the information and making operational decisions.
-
-The project therefore aims to be an **AI-assisted situational-awareness system**, not an autonomous military decision-maker.
-
----
-
-## Key Design Philosophy
-
-An important principle of the project is:
-
-> **AI should help humans understand large amounts of remote-sensing information and make better-informed decisions, rather than replace human judgment.**
-
-The system should therefore eventually communicate not only a prediction, but also some indication of:
-
-**What was detected?**
-
-**Why was it detected?**
-
-**What evidence supports the prediction?**
-
-**How confident is the system?**
-
-This confidence/uncertainty component is expected to be important because satellite data can be incomplete, noisy, outdated, or affected by environmental conditions.
-
----
-
-## Existing Challenges and Constraints
-
-We already recognize that this concept has significant limitations and difficult technical problems.
-
-These have intentionally **not yet been solved**.
-
-Examples include:
-
-### Satellite resolution
-
-Satellite imagery may not provide enough spatial detail to identify every object or event of interest.
-
-### Revisit frequency
-
-A satellite cannot necessarily observe a location continuously. The system therefore has to deal with gaps between observations.
-
-### Optical limitations
-
-Optical imagery can be affected by clouds, darkness, snow, atmospheric conditions, and other visibility issues.
-
-### Radar interpretation
-
-Radar/SAR provides valuable information but is fundamentally different from ordinary imagery and can be difficult to interpret correctly.
-
-### Mountain complexity
-
-Himalayan terrain is highly complex. Shadows, steep slopes, snow, rock, vegetation, and constantly changing environmental conditions can make automated interpretation difficult.
-
-### False positives
-
-Natural changes may look like human activity, while human-made changes may resemble natural changes.
-
-### Hazard prediction uncertainty
-
-Avalanche or landslide prediction cannot reliably depend on imagery alone. Additional environmental variables and historical information may be required.
-
-### Data availability
-
-The project may depend on the availability, resolution, frequency, licensing, and quality of satellite and environmental datasets.
-
-### AI uncertainty
-
-The system can make incorrect predictions and therefore should not present every output as certain.
-
-### Real-time expectations
-
-"Continuous surveillance" does not necessarily mean true real-time observation. Satellite systems have physical limitations in coverage, revisit time, bandwidth, and processing.
-
-These constraints are part of the problem space and are expected to drive future research.
-
----
-
-## Future Direction
-
-The long-term vision is to build a platform that combines different types of geospatial information and produces a continuously updated representation of a region.
-
-Conceptually:
-
-**Satellite observations**
-
-→ **AI analysis**
-
-→ **Change detection**
-
-→ **Terrain/environment understanding**
-
-→ **Risk assessment**
-
-→ **Confidence estimation**
-
-→ **Human decision support**
-
-The exact technical architecture, models, processing pipeline, data sources, edge-case handling, and deployment strategy have **not yet been finalized** and should be researched separately rather than assumed at this stage.
-
----
-
-## Potential Future Intelligence Layers
-
-The eventual system could potentially contain several analytical layers:
-
-### Change Intelligence
-
-Identify meaningful differences between observations over time.
-
-### Terrain Intelligence
-
-Understand elevation, slope, aspect, terrain structure, and related characteristics.
-
-### Environmental Intelligence
-
-Analyse snow, weather, surface conditions, and other environmental variables.
-
-### Hazard Intelligence
-
-Estimate potential avalanche, landslide, or other environmental risks.
-
-### Human-Activity Change Intelligence
-
-Investigate whether detected changes are potentially associated with human activity.
-
-### Confidence / Uncertainty Layer
-
-Communicate how reliable each AI-generated assessment is.
-
-These are **future capability areas**, not finalized implementation decisions.
-
----
-
-## Broader Vision
-
-The broader vision is to create a **geospatial AI decision-support platform for difficult-to-monitor regions**.
-
-The system could eventually be adapted to different environments beyond the Himalayas, including:
-
-* Mountain regions
-* Disaster-prone areas
-* Remote infrastructure
-* Forest regions
-* Glacial regions
-* Border or sensitive geographic areas
-* Tourist and trekking regions
-
-The central idea remains the same:
-
-> **Use multi-sensor Earth observation and AI to continuously understand large, difficult-to-access regions and convert raw observations into useful human-readable intelligence.**
-
----
-
-## Strategic / National Technology Context
-
-The project is intended to be compatible with the broader growth of India's Earth-observation and satellite capabilities and could potentially benefit from future satellite constellations and improved revisit frequency.
-
-A specific assumption currently being considered by the team is alignment with India's future expansion of satellite-based observation capabilities, including a possible constellation around the end of the decade. This timing and the exact capabilities of any future constellation should be **independently verified during the research phase** rather than treated as a confirmed project requirement.
-
----
-
-## What This Project Is Solving
-
-At the highest level, the problem can be summarized as:
-
-> **How can we maintain reliable situational awareness of a difficult, remote, and environmentally harsh region when continuous physical or drone-based observation is difficult, by combining multiple satellite sensing modalities and AI to detect changes, understand terrain and environmental conditions, identify potential hazards, and provide confidence-aware information to human decision-makers?**
-
----
-
-## What We Have NOT Decided Yet
-
-The following topics are intentionally open and should be researched later:
-
-* Exact satellite data sources
-* Optical/SAR datasets and resolutions
-* Sensor-fusion methodology
-* Change-detection algorithms
-* AI/ML models
-* Avalanche prediction methodology
-* Weather and snow datasets
-* Terrain modelling approach
-* Confidence-score methodology
-* Revisit-frequency strategy
-* Edge-case handling
-* False-positive/false-negative handling
-* Real-time vs near-real-time processing
-* Cloud infrastructure vs edge processing
-* GIS/3D visualization
-* Alert generation
-* Evaluation metrics
-* Dataset creation
-* Ground-truth requirements
-* Deployment architecture
-* Defense integration
-* Civilian deployment
-* Cost and scalability
-
-These should be treated as **future design and research questions**, not assumptions.
-
----
-
-## One-Sentence Project Definition
-
-**An AI-powered multi-sensor Earth-observation system that combines optical and radar satellite data to monitor difficult regions, detect meaningful changes, analyse terrain and environmental hazards, estimate uncertainty, and provide human decision-makers with continuously updated situational awareness.**
-
+## Macro Pipeline
+
+1. **Multi-sensor acquisition** — optical + SAR imagery over a defined area of interest, multiple timestamps, ideally from a satellite constellation (not single-pass) to shrink revisit time gaps.
+2. **Preprocessing & co-registration** — align all timestamps/sensors to the same pixel grid; mask unusable data (cloud, noise) so downstream layers aren't fed garbage.
+3. **Intelligence layers (parallel evidence generation layers, with dependencies where required):**
+   - **Change Intelligence** — what changed since the last observation, and where.
+   - **Terrain Intelligence** — elevation, slope, aspect, terrain structure.
+   - **Environmental Intelligence** — snow, weather, surface conditions.
+   - **Hazard Intelligence** — avalanche, landslide, and other instability risk.
+   - **Human-Activity Change Intelligence** — whether a detected change is plausibly human-induced vs. natural.
+4. **Evidence fusion** — combine the independent layers' outputs per location at decision level, not as one opaque score.
+5. **Confidence / uncertainty estimation** — attach a reliability estimate to every fused assessment.
+6. **Alerting** — convert the fused, confidence-rated output into discrete, reviewable units for a human (not a raw probability map).
+7. **Human review & feedback** — a person confirms or rejects each alert; outcomes feed back into the system to improve future detection and scoring.
+
+## Use Cases (dual use, same infrastructure)
+
+- **Defense / border region monitoring:** detected changes, areas requiring attention, environmental conditions, terrain characteristics, historical changes, confidence estimates — decision support only, no autonomous action.
+- **Civilian mountain safety:** avalanche monitoring, snow-condition assessment, landslide monitoring, infrastructure monitoring, trekker/hiker safety, search-and-rescue support, disaster monitoring.
+
+## Honest Differentiation
+
+- SAR-optical fusion for change detection is **not novel** — it's an active published research area, and commercial systems already sell it.
+- What's actually distinct: scoping to Himalayan terrain specifically, an auditable late-fusion design where every alert traces to named evidence rather than one opaque score, and a human feedback loop wired in from the start.
+
+## Known Constraints (apply across the whole pipeline)
+
+- Satellite resolution may not resolve every object/event of interest.
+- Revisit frequency gaps are structural; a constellation reduces but doesn't eliminate them.
+- Optical is blind under cloud/darkness; SAR is harder to interpret and needs its own handling, not shared tooling with optical.
+- Himalayan terrain complexity (shadows, slopes, snow, rock, vegetation) makes automated interpretation harder than flatter terrain most published work targets.
+- False positives/negatives run both directions — natural change can resemble human activity and vice versa.
+- Hazard prediction (avalanche/landslide) from imagery alone is likely insufficient; probably needs added environmental/historical data.
+- Data availability, licensing, and compute quotas constrain what's actually buildable at any given time.
+- Model outputs can be wrong — the confidence layer exists specifically so the system doesn't overclaim certainty.
+
+## Explicitly Undecided
+
+Exact datasets per layer · sensor-fusion methodology · change-detection algorithms · hazard-prediction methodology · terrain-modelling approach · confidence-score methodology · revisit-frequency strategy at constellation scale · false-positive/negative handling policy · real-time vs. near-real-time processing · cloud vs. edge infrastructure · visualization approach · alert-generation policy · evaluation metrics · ground-truth/dataset creation strategy · defense integration path · civilian deployment path · cost and scalability.
