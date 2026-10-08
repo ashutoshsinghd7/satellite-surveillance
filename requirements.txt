@@ -1,1 +1,23 @@
-# Python dependencies for the GEE pipeline, FastAPI backend, SQLite storage, and map interface.
+# Google Earth Engine Python API
+earthengine-api>=1.6,<2.0
+
+# Numerical and tabular processing for indices, thresholds, and scoring
+numpy>=2.0,<3.0
+pandas>=2.2,<3.0
+
+# Geometry and GeoJSON handling for AOIs and grid cells
+shapely>=2.0,<3.0
+
+# FastAPI backend and local ASGI server
+fastapi>=0.115,<1.0
+uvicorn[standard]>=0.30,<1.0
+
+# Pydantic models and environment configuration
+pydantic>=2.8,<3.0
+python-dotenv>=1.0,<2.0
+
+# Optional Python-side map generation utilities
+folium>=0.17,<1.0
+
+# Test runner for the expanding test suite
+pytest>=8.0,<9.0
