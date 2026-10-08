@@ -1,24 +1,31 @@
 # Instructions for AI Coding Agents
 
-I'm building **GeoAgis**, an AI system that fuses optical and SAR satellite imagery over difficult, remote terrain to detect change and assess environmental/terrain hazards. This prototype focuses on optical-only (Sentinel-2) change detection via Google Earth Engine, with terrain and hazard signals, scoped to a single area of interest.
+I'm building **GeoAgis**, an AI system that fuses optical and SAR satellite imagery over difficult, remote terrain to detect change and assess environmental and terrain hazards. This prototype focuses on optical-only Sentinel-2 change detection through Google Earth Engine, with terrain and hazard signals, scoped to one area of interest.
 
-**Before proposing any architectural change, read CONTEXT.md and PROTOTYPE.md in full.** They are the source of truth for scope, reasoning, and constraints. Do not invent reasoning or requirements that aren't in those files.
+`CONTEXT.md` and `PROTOTYPE.MD` are the full source of truth for scope, reasoning, constraints, and the prototype plan. Read both files in full before proposing any architectural change. Do not invent requirements or reasoning that are not in those files.
 
-## Hard Rules (Closed Decisions)
+## Closed decisions
 
-Check DECISIONS.md before proposing an alternative to any architectural choice below—these are closed for the prototype phase:
+Check `DECISIONS.md` before proposing an alternative to an existing architectural decision. These decisions are closed for the prototype phase:
 
-- **Do not suggest STAC, Planetary Computer, or other data APIs** — we use Google Earth Engine.
-- **Do not suggest fine-tuning TerraMind or training a custom model** — TerraMind is frozen/zero-shot only; fine-tuning is deferred post-prototype due to lack of labeled data. If TerraMind integration fails within the 3–4 hour timebox, drop it and fall back to classical signals only.
-- **Do not add SAR integration** — optical-only validation is a prerequisite. SAR is explicitly deferred.
-- **Do not build multi-timestamp trend analysis or time-series modeling** — T1/T2 pairwise comparisons only.
-- **Do not build a human-review write-back loop** — feedback collection is nice-to-have, not demo-critical.
+- Do not suggest STAC, Microsoft Planetary Computer, or another data API; this prototype uses Google Earth Engine.
+- Do not suggest fine-tuning TerraMind or training a custom model; TerraMind is frozen and zero-shot only. If its integration fails within the 3–4 hour timebox, fall back to classical signals only.
+- Do not add SAR integration; optical-only validation is a prerequisite and SAR is explicitly deferred.
+- Do not build multi-timestamp trend analysis or time-series modeling; use T1/T2 pairwise comparisons only.
+- Do not build a human-review write-back loop; feedback collection is nice-to-have and not demo-critical.
 
-## Repository Structure (Convention)
+## Off-limits for this prototype
 
-Place all new code according to this layout (already created as placeholders):
+- SAR integration.
+- TerraMind fine-tuning or custom model training.
+- Multi-timestamp trend analysis or time-series modeling.
+- Human-review write-back or feedback loops.
 
-```
+## Repository structure convention
+
+Place new code in the existing layout below. Do not create additional top-level directories or deviate from this structure without explicit approval.
+
+```text
 ├── gee/                    # Google Earth Engine pipelines
 │   ├── aoi.py             # AOI definition and retrieval
 │   ├── fetch_optical.py   # Sentinel-2 acquisition and compositing
@@ -36,18 +43,16 @@ Place all new code according to this layout (already created as placeholders):
 │   └── schema.sql         # SQLite schema definition
 ├── webapp/                # Frontend
 │   └── map.html           # Leaflet/folium map interface
-├── data/                  # (gitignored) Local data cache
-├── tests/                 # Test suite (currently empty)
+├── data/                  # Gitignored local data cache
+├── tests/                 # Test suite
 ├── .env.example           # Environment variable template
 └── requirements.txt       # Python dependencies
 ```
 
-Do not create additional top-level directories or deviate from this structure without explicit approval.
-
 ## Testing
 
-Tests should go in `tests/`. The directory exists but is empty. How to run tests will be documented as the test suite grows.
+The `tests/` directory exists but is currently empty. The instructions for running tests will be documented as the test suite grows.
 
-## No Implementation Stubs
+## No implementation stubs
 
-When creating placeholder files, add exactly one comment line (correct syntax for the file type) describing what will go there, based on CONTEXT.md and PROTOTYPE.md. Do not write function bodies, example code, or "pass" stubs.
+When creating placeholder files, add exactly one comment line using the correct syntax for the file type. Describe what will go there based on `CONTEXT.md` and `PROTOTYPE.MD`. Do not write function bodies, example code, or `pass` stubs.

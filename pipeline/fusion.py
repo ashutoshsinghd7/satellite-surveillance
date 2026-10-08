@@ -1,1 +1,1 @@
-# Heuristic late-fusion of NDVI/NDSI delta, slope plausibility, and TerraMind distance
+# Late fusion of independent classical and TerraMind evidence signals.

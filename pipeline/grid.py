@@ -1,1 +1,1 @@
-# AOI gridding and grid-cell management
+# AOI gridding and discrete reviewable cell management.

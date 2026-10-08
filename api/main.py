@@ -1,1 +1,1 @@
-# FastAPI app and route handlers serving grid cells as GeoJSON
+# FastAPI application and GeoJSON route handlers for scored grid cells.

@@ -1,1 +1,1 @@
-# TerraMind 1.0 frozen zero-shot embeddings and embedding-distance signal
+# Frozen TerraMind zero-shot feature extraction and fourth evidence signal.

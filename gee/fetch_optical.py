@@ -1,1 +1,1 @@
-# Sentinel-2 L2A acquisition and pre/post-monsoon compositing via GEE
+# Sentinel-2 L2A acquisition, cloud masking, and T1/T2 compositing through GEE.

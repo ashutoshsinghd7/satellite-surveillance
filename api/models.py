@@ -1,1 +1,1 @@
-# Pydantic models for API responses (grid cell, score, confidence, signals)
+# Pydantic response models for grid-cell location, score, confidence, and signals.

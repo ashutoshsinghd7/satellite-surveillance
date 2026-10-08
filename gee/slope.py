@@ -1,1 +1,1 @@
-# DEM-derived slope and aspect computation for terrain plausibility masking
+# Copernicus DEM-derived slope and aspect terrain signals for the AOI.

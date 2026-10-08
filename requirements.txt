@@ -1,1 +1,1 @@
-# Python dependencies for GEE pipeline, FastAPI, SQLite, and Leaflet/folium rendering
+# Python dependencies for the GEE pipeline, FastAPI backend, SQLite storage, and map interface.
