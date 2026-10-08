@@ -1,58 +1,62 @@
-# Instructions for AI Coding Agents
+# AGENTS.md
 
-I'm building **GeoAgis**, an AI system that fuses optical and SAR satellite imagery over difficult, remote terrain to detect change and assess environmental and terrain hazards. This prototype focuses on optical-only Sentinel-2 change detection through Google Earth Engine, with terrain and hazard signals, scoped to one area of interest.
+Entry point for any AI agent (or human) about to modify this repository.
+Read this file first. It tells you what else to read, and nothing more.
 
-`CONTEXT.md` and `PROTOTYPE.MD` are the full source of truth for scope, reasoning, constraints, and the prototype plan. Read both files in full before proposing any architectural change. Do not invent requirements or reasoning that are not in those files.
+---
 
-## Closed decisions
+## Repository Structure
 
-Check `DECISIONS.md` before proposing an alternative to an existing architectural decision. These decisions are closed for the prototype phase:
-
-- Do not suggest STAC, Microsoft Planetary Computer, or another data API; this prototype uses Google Earth Engine.
-- Do not suggest fine-tuning TerraMind or training a custom model; TerraMind is frozen and zero-shot only. If its integration fails within the 3–4 hour timebox, fall back to classical signals only.
-- Do not add SAR integration; optical-only validation is a prerequisite and SAR is explicitly deferred.
-- Do not build multi-timestamp trend analysis or time-series modeling; use T1/T2 pairwise comparisons only.
-- Do not build a human-review write-back loop; feedback collection is nice-to-have and not demo-critical.
-
-## Off-limits for this prototype
-
-- SAR integration.
-- TerraMind fine-tuning or custom model training.
-- Multi-timestamp trend analysis or time-series modeling.
-- Human-review write-back or feedback loops.
-
-## Repository structure convention
-
-Place new code in the existing layout below. Do not create additional top-level directories or deviate from this structure without explicit approval.
-
-```text
-├── gee/                    # Google Earth Engine pipelines
-│   ├── aoi.py             # AOI definition and retrieval
-│   ├── fetch_optical.py   # Sentinel-2 acquisition and compositing
-│   ├── indices.py         # NDVI, NDSI, and custom index computation
-│   ├── slope.py           # DEM-derived terrain signals
-│   └── terramind.py       # TerraMind zero-shot embeddings (frozen)
-├── pipeline/              # Fusion and scoring logic
-│   ├── fusion.py          # Heuristic evidence fusion (late fusion)
-│   ├── scoring.py         # Heuristic score computation per grid cell
-│   └── grid.py            # AOI gridding and cell management
-├── api/                   # FastAPI backend
-│   ├── main.py            # FastAPI app and route handlers
-│   └── models.py          # Pydantic models for API responses
-├── db/                    # Database schema
-│   └── schema.sql         # SQLite schema definition
-├── webapp/                # Frontend
-│   └── map.html           # Leaflet/folium map interface
-├── data/                  # Gitignored local data cache
-├── tests/                 # Test suite
-├── .env.example           # Environment variable template
-└── requirements.txt       # Python dependencies
+```
+/
+├── README.md
+├── CONTEXT.md
+├── PROTOTYPE.md
+├── DECISIONS.md
+├── AGENTS.md
+├── CHECKPOINTS.md
+├── docs/
+│   ├── aoi.md
+│   ├── datasources.md
+│   └── research.md
+├── src/                 # empty — no implementation yet
+└── requirements.txt
 ```
 
-## Testing
+| File | What it holds | Authoritative for |
+|---|---|---|
+| `README.md` | Project overview, how to set up and run | Orientation, not decisions |
+| `CONTEXT.md` | Macro vision, long-term pipeline, problem statement | Why the project exists |
+| `PROTOTYPE.md` | Current build scope — what's actually being built right now | What is in/out of scope for this phase |
+| `DECISIONS.md` | Append-only log of real alternatives considered and rejected | Why X was chosen over Y |
+| `CHECKPOINTS.md` | Task breakdown, owner, status, dependencies, output location | Current task state |
+| `docs/aoi.md` | Finalized AOI bounding box + the documented landslide event it's anchored on | The AOI, once CP0 is done |
+| `docs/datasources.md` | GEE collection IDs, T1/T2 date windows, DEM source, any dataset-specific notes | Which exact datasets/params are in use |
+| `docs/research.md` | TerraMind integration notes, paper summaries, dead ends, anything exploratory | Reference material only — never a build spec |
+| `src/` | Implementation | — empty until CP1 begins |
+| `requirements.txt` | Python dependencies | — |
 
-The `tests/` directory exists but is currently empty. The instructions for running tests will be documented as the test suite grows.
+**No-duplication rule:** AOI coordinates live only in `docs/aoi.md`. Dataset IDs and date windows live only in `docs/datasources.md`. `PROTOTYPE.md` references these rather than repeating values. If you find a value duplicated across files, that's a bug — fix it by removing the copy, not by updating both.
 
-## No implementation stubs
+---
 
-When creating placeholder files, add exactly one comment line using the correct syntax for the file type. Describe what will go there based on `CONTEXT.md` and `PROTOTYPE.MD`. Do not write function bodies, example code, or `pass` stubs.
+## Minimum Reading Before Touching Anything
+
+In order:
+
+1. **This file.**
+2. **`PROTOTYPE.md`** — current scope. Read `CONTEXT.md` instead/also only if the task is cross-cutting or touches long-term direction, not a single checkpoint.
+3. **Your checkpoint's entry in `CHECKPOINTS.md`** — status, dependencies, what output is expected, what contract (schema/format) it must produce or consume.
+4. **The last 3–5 entries in `DECISIONS.md`** — don't re-propose something already rejected; check the reasoning first.
+5. **`docs/aoi.md` and `docs/datasources.md`** if your task touches acquisition, signals, or anything AOI/dataset-specific — use the values there, never re-derive or guess them.
+
+Do **not** default to reading the full `DECISIONS.md` history, or `docs/research.md`, unless the task specifically requires that context (e.g. working on the TerraMind integration).
+
+---
+
+## Rules
+
+- `PROTOTYPE.md` is the scope boundary. If a task seems to require something `PROTOTYPE.md` excludes, stop and flag it — don't silently expand scope.
+- Every checkpoint in `CHECKPOINTS.md` is only "done" when it has a linked, inspectable output (commit/PR), not by description.
+- A new real decision (alternative seriously considered and dropped) gets appended to `DECISIONS.md`. Don't skip this because it feels obvious in hindsight.
+- `src/` structure, when populated, should mirror `PROTOTYPE.md`'s pipeline steps (acquisition → preprocessing → signals → fusion → storage → api → frontend), not `CONTEXT.md`'s macro intelligence layers — the prototype only implements a slice of those.
