@@ -1,10 +1,10 @@
-# Prototype — Himalayan Landslide Detection Web App
+# Prototype  GeoAgis
 
-**Status:** not yet built. 3–4 day build target.
+**Status:** in development
 
-**Relationship to CONTEXT.md:** this is one narrow instantiation of "Change Intelligence" (plus partial Terrain Intelligence and Confidence) from the macro pipeline — scoped to a single AOI, optical-only sensing, heuristic (not learned) scoring, served as a real web app rather than a notebook. Nothing here is the project's final architecture; it's the first demoable slice.
+**Relationship to CONTEXT.md:** this is one narrow instantiation of "Change Intelligence" (plus partial Terrain Intelligence and Confidence) from the macro pipeline  scoped to a single AOI, optical-only sensing, heuristic (not learned) scoring, served as a real web app rather than a notebook. Nothing here is the project's final architecture; it's the first demoable slice.
 
-**Form factor:** a running web app — FastAPI backend serving alert data, a Leaflet/folium map frontend a person can actually open and click around in. Not a notebook. This matters for tech choices below: every component needs to be servable, not just runnable once interactively.
+**Form factor:** a running web app  FastAPI backend serving alert data, a Leaflet/folium map frontend a person can actually open and click around in. Not a notebook. This matters for tech choices below: every component needs to be servable, not just runnable once interactively.
 
 ---
 
