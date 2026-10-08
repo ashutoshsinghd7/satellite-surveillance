@@ -1,1 +1,0 @@
-# Copernicus DEM-derived slope and aspect terrain signals for the AOI.

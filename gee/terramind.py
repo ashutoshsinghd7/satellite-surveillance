@@ -1,1 +1,0 @@
-# Frozen TerraMind zero-shot feature extraction and fourth evidence signal.

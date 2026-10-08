@@ -1,6 +1,6 @@
 # GeoAgis
 
-I'm building GeoAgis, an AI system that fuses optical and SAR satellite imagery over difficult, remote terrain—starting with the Himalayas—to continuously detect change, assess terrain and environmental hazards, and deliver interpreted, confidence-rated intelligence. Physical and drone surveillance in high-altitude terrain is unreliable because of cold, snowfall, cloud cover, rugged terrain, battery limits, and restricted access; satellite imagery helps cover those gaps, but the volume is too large to review manually. The goal is to move from raw imagery to detected change to interpreted, confidence-rated intelligence rather than stopping at image classification.
+were building GeoAgis, an AI system that fuses optical and SAR satellite imagery over difficult, remote terrain—starting with the Himalayas—to continuously detect change, assess terrain and environmental hazards, and deliver interpreted, confidence-rated intelligence. Physical and drone surveillance in high-altitude terrain is unreliable because of cold, snowfall, cloud cover, rugged terrain, battery limits, and restricted access; satellite imagery helps cover those gaps, but the volume is too large to review manually. The goal is to move from raw imagery to detected change to interpreted, confidence-rated intelligence rather than stopping at image classification.
 
 ## Current status
 

@@ -1,1 +1,0 @@
--- SQLite schema for grid-cell locations, component signals, scores, confidence, and status.

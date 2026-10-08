@@ -1,1 +1,0 @@
-# Pydantic response models for grid-cell location, score, confidence, and signals.

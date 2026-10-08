@@ -1,1 +1,0 @@
-# Google Earth Engine AOI definition and retrieval for the documented event area.

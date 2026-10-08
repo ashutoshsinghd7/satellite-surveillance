@@ -1,1 +1,0 @@
-# AOI gridding and discrete reviewable cell management.

@@ -1,1 +1,0 @@
-# Heuristic priority score computation for each AOI grid cell.

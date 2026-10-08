@@ -1,1 +1,0 @@
-# NDVI and NDSI computation and pairwise T1/T2 delta signals.
