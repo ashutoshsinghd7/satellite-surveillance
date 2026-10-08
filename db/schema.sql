@@ -1,0 +1,1 @@
+-- SQLite schema for grid cells, scores, signals, confidence, and review status

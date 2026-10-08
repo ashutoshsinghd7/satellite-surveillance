@@ -1,37 +1,32 @@
-# AI-Based Multi-Sensor Earth Observation for Remote Regions
+# GeoAgis Prototype
 
-> **Status: Concept phase.** No pipeline, models, or datasets are finalized. Technical docs will be added as the project develops.
+I'm building an AI system that fuses optical and SAR satellite imagery over difficult, remote terrain to continuously detect change, assess terrain and environmental hazards, and deliver interpretable, confidence-rated intelligence to decision-makers—not stopping at image classification, but turning raw imagery into actionable intelligence. The core problem I'm solving: physical and drone surveillance in high-altitude terrain (starting with the Himalayas) is unreliable due to cloud cover, snow, cold, restricted access, and battery limits, while satellites can cover these gaps—but imagery volume is far too large to review manually.
 
-An AI system that combines **optical** and **radar (SAR)** satellite data to monitor hard-to-reach regions like the Himalayas, detect meaningful changes, assess terrain and hazards, and give humans confidence-aware situational awareness.
+**Current Status:** The macro project is in concept phase. I'm actively building a 3–4 day optical-only prototype as a running web app (not a notebook), scoped to a single area of interest with a documented landslide event.
 
-## Problem
+## Setup & Run (to be filled in as each step is built)
 
-Harsh weather, rugged terrain, and limited access make continuous physical or drone-based surveillance unreliable in high-altitude regions. Satellites cover these areas, but the volume of imagery is too large for humans to analyse continuously.
+### Prerequisites
+- Python 3.9+
+- Google Earth Engine account with authentication
 
-> How do we continuously understand what is changing in a difficult region and give humans interpretable information to decide on?
+### Installation
+- Create a virtual environment: `python -m venv venv`
+- Activate it: `source venv/bin/activate` (or `venv\Scripts\activate` on Windows)
+- Install dependencies: `pip install -r requirements.txt`
+- Authenticate with Google Earth Engine: `earthengine authenticate`
 
-## Approach
+### Running the App
+- Start the FastAPI backend: `uvicorn api.main:app --reload`
+- Open the webapp: navigate to `http://localhost:8000` and open `webapp/map.html`
 
-- **Optical imagery:** rich detail, but limited by clouds and darkness.
-- **Radar / SAR:** works day and night through cloud, but harder to interpret.
-- **AI:** fuses both to turn raw imagery into usable information.
+## What This Prototype Does
 
-```
-Satellite data → Change detection → Terrain & hazard analysis → Confidence estimate → Human decision support
-```
+Optical-only (Sentinel-2) pipeline via Google Earth Engine on one 10–15 km area of interest anchored on a documented Himalayan landslide event. It computes NDVI/NDSI delta + applies a slope filter + uses TerraMind (frozen, zero-shot only) as a fourth independent evidence signal → produces a heuristic priority score per grid cell → stores results in SQLite → serves them via FastAPI as GeoJSON → displays them on a Leaflet/folium web map with before/after true-color imagery.
 
-## Use Cases
+## Explicitly Out of Scope (This Prototype)
 
-- **Defense:** change detection and situational awareness for border and sensitive regions.
-- **Mountain safety:** avalanche, landslide, and snow monitoring; trekker safety; search and rescue; disaster response.
-
-## Principles
-
-- **Decision support, not autonomy.** Humans make the decisions.
-- **Explainable outputs:** what was detected, why, on what evidence, and how confident.
-- **Honest about uncertainty.** "Continuous" monitoring is limited by satellite revisit time and coverage.
-
-## Known Challenges
-
-Resolution and revisit limits, SAR interpretation, complex mountain terrain, false positives, hazard prediction needing more than imagery, and data availability.
-
+- **SAR** — adds a whole separate preprocessing chain (speckle filtering, different calibration). Validate the optical baseline works at all before adding a second sensor's complexity.
+- **Fine-tuning TerraMind's U-Net decoder** — requires labeled data we don't have. TerraMind is used frozen/zero-shot only.
+- **Human review write-back loop** — nice-to-have, not demo-critical.
+- **Multi-timestamp trend analysis** — T1/T2 pairwise only, no time series.
