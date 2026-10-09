@@ -1,1 +1,7 @@
 .venv/
+__pycache__/
+*.py[cod]
+
+# Generated satellite rasters
+data/raw/*.tif
+data/raw/*.aux.xml
