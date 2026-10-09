@@ -2,7 +2,7 @@
 
 **Satellite-based change detection for preliminary landslide assessment in the Himalayas.**
 
-The Himalayan Landslide Detection Pipeline is a proposed geospatial system that analyses satellite imagery and terrain information to identify areas showing potential landslide-related surface changes. It aims to combine spectral indicators, terrain context and semantic image features to generate interpretable, geographically referenced candidate alerts.
+The Change Detection Pipeline is a proposed geospatial system that analyses satellite imagery and terrain information to identify areas showing potential landslide-related surface changes. It aims to combine spectral indicators, terrain context and semantic image features to generate interpretable, geographically referenced candidate alerts.
 
 > **Project status:** Research prototype under development. The complete pipeline is proposed architecture, not a claim that every component is implemented or validated.
 
@@ -16,7 +16,7 @@ The initial approach uses Sentinel-2 optical imagery, elevation data and multipl
 
 ## Q2. What problem does it address?
 
-Landslide assessment in the Himalayas is challenging because of steep terrain, difficult ground access, changing weather and the large areas that may require investigation.
+Change assessment in the Himalayas is challenging because of steep terrain, difficult ground access, changing weather and the large areas that may require investigation.
 
 Satellite imagery provides a way to compare landscape conditions across different dates. However, vegetation changes, snowmelt, cloud shadows and other environmental variations can produce misleading signals.
 
