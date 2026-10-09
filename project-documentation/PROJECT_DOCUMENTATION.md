@@ -156,9 +156,9 @@ These problems need fixing with steps, checks and being clear.
 
 ## 11. Future Scope
 
-More ideas could add radar pictures check satellite pictures make the scores better make a map tool and check more landslides.
-
-These ideas will be looked at after the first plan is checked and data is ready.
+-Aligned with India's goal of Aatmanirbhar Bharat
+-Align's with india's interest of launching sar satellite and constallations in orbit by 2029. 
+-can be used for military and border patrolling use case for inidian army
 
 ## 12.. Technical Resources
 
