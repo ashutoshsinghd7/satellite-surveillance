@@ -10,7 +10,7 @@ The architecture consists of eight stages, from selecting a study area to visual
 
 ## 2. Proposed System Architecture
 
-![Himalayan Landslide Detection Pipeline](images/landslide-pipeline.png)
+![Himalayan Landslide Detection Pipeline](images/landslide-pipeline.png.jpeg)
 
 *Figure 1: Proposed end-to-end architecture of the Himalayan Landslide Detection Pipeline.*
 
