@@ -1,4 +1,4 @@
-# Himalayan Landslide Detection Pipeline
+# Change Detection Pipeline
 
 **Satellite-based change detection for preliminary landslide assessment in the Himalayas.**
 
