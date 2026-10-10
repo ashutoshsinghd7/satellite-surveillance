@@ -11,7 +11,7 @@ Status values: `not started` / `in progress` / `blocked` / `done`
 
 ## CP0 — AOI & Event Definition
 
-- **Status:** not started
+- **Status:** started (done)
 - **Owner:** —
 - **Maps to:** PROTOTYPE.md Step 1
 - **Depends on:** nothing (blocking — everything else needs this)
@@ -28,7 +28,7 @@ Status values: `not started` / `in progress` / `blocked` / `done`
 
 ## CP1 — GEE Imagery Acquisition
 
-- **Status:** not started
+- **Status:** started (have changes)
 - **Owner:** —
 - **Maps to:** PROTOTYPE.md Step 2
 - **Depends on:** CP0
