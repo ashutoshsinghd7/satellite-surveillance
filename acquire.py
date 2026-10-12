@@ -19,7 +19,7 @@ import ee
 import requests
 import yaml
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parent.parent
 
 
 def fenced_block(md_path: Path, lang: str) -> str:
