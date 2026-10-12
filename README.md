@@ -59,7 +59,6 @@ The following images illustrate the data used in the project.
 
 ![Digital Elevation Model](project-documentation/images/dem.jpeg)
 
-*Note: T1 and T2 refer to the earlier and later observations used for comparison. Their exact acquisition dates, seasonal periods and relationship to a documented landslide event must be established from the source metadata before interpreting them as pre-event and post-event evidence.*
 
 ## Q5. How will the system identify changes?
 
